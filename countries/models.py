@@ -18,6 +18,7 @@ class Country(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def area_km2(self):
+        ''' thousand separator'''
         return f"{self.area:,}"
         
     
@@ -25,6 +26,7 @@ class Country(models.Model):
         return self.name
     
     class Meta:
+        ''' admin page shows this model as countrys so i've changed it'''
         verbose_name_plural = "Countries"
         ordering = ['name']
         
