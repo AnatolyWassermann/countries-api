@@ -16,8 +16,14 @@ class Country(models.Model):
     code = models.CharField(max_length=10, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    def area_km2(self):
+        return f"{self.area:,}"
+        
+    
     def __str__(self):
         return self.name
+    
     class Meta:
         verbose_name_plural = "Countries"
         ordering = ['name']
