@@ -3,8 +3,14 @@ from django.db import models
 class Region(models.Model):
     name = models.CharField(max_length=30, unique=True, null=True)
     area = models.IntegerField(default=1)
+
+    def area_km2(self):
+        ''' thousand separator'''
+        return f"{self.area:,}"
     def __str__(self):
         return self.name
+    class Meta:
+        ordering = ['name']
     
 
 

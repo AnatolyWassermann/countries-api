@@ -8,4 +8,8 @@ class CountryAdmin(admin.ModelAdmin):
     
 
 admin.site.register(Country, CountryAdmin)
-admin.site.register(Region)
+
+class RegionAdmin(admin.ModelAdmin):
+    list_display = ['name', 'area_km2']
+
+admin.site.register(Region, RegionAdmin)
