@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # my app
     'countries',
     'rest_framework',
+    'webapi',
     
     'django.contrib.admin',
     'django.contrib.auth',
