@@ -2,8 +2,10 @@
 from django.urls import path, include
 from .views import (
     CountryApiView,
+    RegionApiView
 )
 
 urlpatterns = [
-    path('api/', CountryApiView.as_view())
+    path('countries/', CountryApiView.as_view()),
+    path('regions/', RegionApiView.as_view())
 ]
