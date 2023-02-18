@@ -15,21 +15,16 @@ class ThousandSeparatorField(serializers.IntegerField):
     def to_representation(self, area):
         return f"{area:,}"
     
-# class RegionForeignKeyName(serializers.ReadOnlyField):
-#     def to_representation(self, value):
-#         region = Region.objects.all(id=value)
-#         return region.name
+
 
 class CountrySerializer(serializers.ModelSerializer):
-    # ''' foreign key's name attribute will be shown rather than its ID '''
-    # region = serializers.CharField(source='region.name', read_only=True)
-    # region = RegionForeignKeyName(queryset=Region.objects.all())
-    # region = RegionSerializer()
-    
+ 
+    region = serializers.PrimaryKeyRelatedField(queryset=Region.objects.all())
+    region_name = serializers.StringRelatedField(source='region', read_only=True)
     area = ThousandSeparatorField()
     class Meta:
         model = Country
-        fields = ['id', 'name', 'capital', 'area', 'region', 'code', 'created', 'updated']
+        fields = ['id', 'name', 'capital', 'area', 'region', 'region_name', 'code', 'created', 'updated']
 
     
 

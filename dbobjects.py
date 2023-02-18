@@ -13,6 +13,8 @@ for i in range(len(data)):
     country_name = data[i]['name'].get('common')
     ''' added join method to separate if a country has more than 1 capitals'''
     country_capital = ", ".join(data[i]['capital'])
+    if country_capital == "":
+        country_capital = "None"
     country_area = data[i]['area']
     country_code = data[i]['cca2']
     ''' since region name field only allow unique names i've used get or create method '''
