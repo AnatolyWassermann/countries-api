@@ -1,4 +1,4 @@
-from django.shortcuts import render
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -47,3 +47,64 @@ class RegionApiView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class CountryDetailApiView(APIView):
+    
+    def get_object(self, country_id):
+        """get method"""
+        try:
+            return Country.objects.get(id=country_id)
+        except:
+            return None
+        
+    def get(self, request, country_id, *args, **kwargs):
+        """retrieve"""
+
+        country_instance = self.get_object(country_id)
+        if not country_instance:
+            return Response(
+                {"res": "Object with country id does not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        serializer = CountrySerializer(country_instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def put(self, request, country_id, *args, **kwargs):
+        """ updates the item if exists"""
+        country_instance = self.get_object(country_id)
+        if not country_instance:
+            return Response(
+                {"res": "Object with country id not exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        data = {
+        'name': request.data.get('name'),
+        'capital': request.data.get('capital'),
+        'region': request.data.get('region'),
+        'code': request.data.get('code'),
+        'area': request.data.get('area')
+        }
+        serializer = CountrySerializer(instance = country_instance, data=data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+    def delete(self, request, country_id, *args, **kwargs):
+        '''
+        Deletes the country item if exists
+        '''
+        country_instance = self.get_object(country_id)
+        if not country_instance:
+            return Response(
+                {"res": "Object with country id does not exists"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        country_instance.delete()
+        return Response(
+            {"res": f"Object: {country_instance} deleted!"},
+            status=status.HTTP_200_OK
+        )
