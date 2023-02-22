@@ -39,6 +39,7 @@ class CountryApiView(generics.ListCreateAPIView):
 
 
 class RegionApiView(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated, )
     queryset = Region.objects.all()
     serializer_class = RegionSerializer
 
@@ -65,6 +66,7 @@ class RegionApiView(generics.ListCreateAPIView):
 
 
 class CountryDetailApiView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated, )
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
     lookup_field = 'pk'
@@ -136,6 +138,7 @@ class CountryDetailApiView(generics.RetrieveUpdateDestroyAPIView):
 #         )
 
 class RegionDetailApiView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated, )
     queryset = Region.objects.all()
     serializer_class = RegionSerializer
     lookup_field = 'pk'
