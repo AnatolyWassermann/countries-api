@@ -11,13 +11,14 @@ data = json.load(file)
 for i in range(len(data)):
     country_region = data[i]['region']
     country_name = data[i]['name'].get('common')
-    ''' added join method to separate if a country has more than 1 capitals'''
+    ''' added join method to separate if a country has more than 1 capital'''
     country_capital = ", ".join(data[i]['capital'])
+    ''' if there is no capital '''
     if country_capital == "":
         country_capital = "None"
     country_area = data[i]['area']
     country_code = data[i]['cca2']
-    ''' since region name field only allow unique names i've used get or create method '''
+    ''' since region name field only allow unique names, i've used get_or_create method '''
     Region.objects.get_or_create(name=country_region)
     country = Country.objects.create(name=country_name, 
                                      capital=country_capital, 

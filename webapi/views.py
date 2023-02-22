@@ -5,8 +5,10 @@
 from countries.models import Region, Country
 from .serializers import RegionSerializer, CountrySerializer
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 class CountryApiView(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated, )
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
 

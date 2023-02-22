@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # my app
     'countries',
     'rest_framework',
+    'rest_framework.authtoken',
     'webapi',
     
     'django.contrib.admin',
@@ -44,7 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  
+    ],
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

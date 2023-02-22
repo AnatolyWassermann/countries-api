@@ -32,7 +32,7 @@ class Country(models.Model):
         return self.name
     
     class Meta:
-        ''' admin page shows this model as countrys so i've changed it'''
+        ''' admin page shows this model as "countrys" changed to "countries"'''
         verbose_name_plural = "Countries"
         ordering = ['name']
         
