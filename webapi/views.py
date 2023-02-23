@@ -165,5 +165,6 @@ class CustomAuthToken(ObtainAuthToken):
         return Response({
             'token': token.key,
             'user_id': user.pk,
+            'user_name': user.username,
             'email': user.email
         })

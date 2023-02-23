@@ -6,10 +6,13 @@ from django.contrib.auth.models import User
 
 
 class RegionSerializer(serializers.ModelSerializer):
-    
+    url = serializers.HyperlinkedIdentityField(
+        view_name = "region_detail",
+        lookup_field= "pk"
+    )
     class Meta:
         model = Region
-        fields = ['id', 'name', 'area']
+        fields = ['id', 'url', 'name', 'area']
     
     
 class ThousandSeparatorField(serializers.IntegerField):
@@ -19,13 +22,16 @@ class ThousandSeparatorField(serializers.IntegerField):
 
 
 class CountrySerializer(serializers.ModelSerializer):
- 
+    url = serializers.HyperlinkedIdentityField(
+        view_name = "country_detail",
+        lookup_field = "pk"
+    )
     region = serializers.PrimaryKeyRelatedField(queryset=Region.objects.all())
     region_name = serializers.StringRelatedField(source='region', read_only=True)
     area = ThousandSeparatorField()
     class Meta:
         model = Country
-        fields = ['id', 'name', 'capital', 'area', 'region', 'region_name', 'code', 'created', 'updated']
+        fields = ['id', 'url', 'name', 'capital', 'area', 'region', 'region_name', 'code', 'created', 'updated']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
