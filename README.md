@@ -1,6 +1,6 @@
 # Countries API
 
-Countries API is my first API project. It contains all countries in the world and their respected regions with basic information.
+Countries API is my first API project. It contains information of all countries in the world and their respected regions with basic information.
 
 
 ## Description
