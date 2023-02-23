@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from webapi import urls as webapi_urls
-from rest_framework.authtoken import views
+from rest_framework.authtoken.views import ObtainAuthToken
+# from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-token-auth/', views.obtain_auth_token),
+    path('api-auth/', include('rest_framework.urls')),
+    # path('api-token-auth/', ObtainAuthToken.as_view()),
+    # path('login/', LoginView.as_view(), name='login'),
+    # path('logout/', LogoutView.as_view(), name='logout'),
     path('', include(webapi_urls))
 ]
