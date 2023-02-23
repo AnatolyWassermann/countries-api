@@ -1,7 +1,5 @@
 
-# from rest_framework.views import APIView
-# from rest_framework.response import Response
-# from rest_framework import status
+from rest_framework.views import APIView
 from countries.models import Region, Country
 from .serializers import RegionSerializer, CountrySerializer, UserSerializer
 from rest_framework import generics
@@ -10,12 +8,17 @@ from django.contrib.auth.models import User
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from rest_framework.reverse import reverse
+
+
+
 
 
 class CountryApiView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated, )
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
+    name = 'country_list'
 
 
 
@@ -47,6 +50,7 @@ class RegionApiView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated, )
     queryset = Region.objects.all()
     serializer_class = RegionSerializer
+    name = 'region_list'
 
 # class RegionApiView(APIView):
 #     def get(self, request, *args, **kwargs):
@@ -167,4 +171,13 @@ class CustomAuthToken(ObtainAuthToken):
             'user_id': user.pk,
             'user_name': user.username,
             'email': user.email
+        })
+
+class ApiRootView(APIView):
+    def get(self, request, format=None):
+        return Response({
+            'Regions': reverse('region_list', request=request, format=format),
+            'Countries': reverse('country_list', request=request, format=format),
+            'ToCreateUser': 'go to /createuser/',
+            'Token': 'To make a request from outside, you should POST your username and password  to /api-token-auth/ get your token'
         })

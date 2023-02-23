@@ -6,12 +6,18 @@ from .views import (
     CountryDetailApiView,
     RegionDetailApiView,
     CreateUserView,
-    CustomAuthToken
+    CustomAuthToken,
+    ApiRootView
+    
 )
 
+
+
+
 urlpatterns = [
-    path('countries/', CountryApiView.as_view()),
-    path('regions/', RegionApiView.as_view()),
+    path('', ApiRootView.as_view()),
+    path('countries/', CountryApiView.as_view(), name='country_list'),
+    path('regions/', RegionApiView.as_view(), name='region_list'),
     path('countries/<int:pk>/', CountryDetailApiView.as_view(), name='country_detail'),
     path('regions/<int:pk>/', RegionDetailApiView.as_view(), name='region_detail'),
     path('createuser/', CreateUserView.as_view()),
