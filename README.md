@@ -5,7 +5,7 @@ Countries API is my first API project. It contains information of all countries 
 
 ## Description
 
-I looped through a JSON file i found on Github and extracted the required information and added them to two different tables (countries, regions) in my PostgreSQL database. I converted the objects in this database into APIs using Django Rest Framework. The countries and regions pages, which are in the form of a list on the API, can be used with methods such as GET and POST. Also, when you go into their details, methods such as GET-POST-PUT and DELETE can also be used. For easy navigation, I have added HyperlinkedSerialization and Pagination. I used Token Authentication for Auth. Apart from actual API structure, I used python decouple to hide sensitive information and tested each new feature I added through POSTMAN.
+I have extracted required information from a JSON file using a loop, which I found on Github, and added them to two separate tables, namely "countries" and "regions," in my PostgreSQL database. Next, I used Django Rest Framework to convert the objects in the database into APIs. The API for countries and regions pages is displayed in the form of a list, and they can be accessed using methods like GET and POST. When accessing the details, methods such as GET, POST, PUT, and DELETE can be utilized. To aid in ease of navigation, I implemented HyperlinkedSerialization and Pagination. Additionally, Token Authentication has been used for Auth. In order to protect sensitive information, I utilized python decouple, and all new features that were added have been tested thoroughly via POSTMAN.
 
 
 ## Installation
